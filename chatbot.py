@@ -28,7 +28,7 @@ print(reply)
 print("tokens (in, out):", usage)
 promptheader="These are the previous prompt memories that you must refer to if relevant to the question with just the reply. All the questions i ask will start with the keyword ME. For reference the replies in the memory liststarts with the keyword AI If no memories then just respond to the prompt as usual in plain string: "
 promptlist=""
-
+totalused=0
 while True:
     prompt=input("Enter prompt: ")
     temp=float(input("Enter temperature:"))
@@ -36,4 +36,6 @@ while True:
     reply, usage = ask(totalprompt, temperature=temp)
     print(reply)
     print("tokens (in, out):", usage)
+    totalused+=sum(usage)
+    print("\nTotal tokens used: "+str(totalused)+"\n")
     promptlist+="\nME: "+prompt+"\n"+"AI:"+reply
